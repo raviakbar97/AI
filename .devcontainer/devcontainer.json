@@ -1,0 +1,27 @@
+{
+  "name": "FastAPI Codespace",
+  "dockerFile": "Dockerfile",
+  "appPort": [8000],
+  "postCreateCommand": "pip install --no-cache-dir -r requirements.txt",
+  "customizations": {
+    "vscode": {
+      "tasks": [
+        {
+          "label": "Run FastAPI",
+          "type": "shell",
+          "command": "uvicorn main:app --host 0.0.0.0 --port 8000",
+          "problemMatcher": []
+        }
+      ],
+      "settings": {
+        "terminal.integrated.profiles.linux": {
+          "bash": {
+            "path": "bash",
+            "icon": "terminal-bash"
+          }
+        },
+        "terminal.integrated.defaultProfile.linux": "bash"
+      }
+    }
+  }
+}
