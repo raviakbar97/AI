@@ -1,7 +1,0 @@
-fastapi
-uvicorn
-groq
-pillow
-google-generativeai
-pyperclip
-opencv-python
