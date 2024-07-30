@@ -24,16 +24,32 @@ function App() {
   const sendMessage = async () => {
     if (input.trim() === "") return;
 
-    const response = await fetch("http://localhost:8000/chat", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ prompt: input, session_id: sessionId })
-    });
-    const data = await response.json();
-    setMessages([...messages, { text: input, user: true }, { text: data.response, user: false }]);
-    setInput("");
+    try {
+      const response = await fetch("http://localhost:8000/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ prompt: input, session_id: sessionId })
+      });
+
+      if (!response.ok) {
+        // Log error message if response is not ok
+        const errorText = await response.text();
+        console.error('Error:', errorText);
+        return;
+      }
+
+      const data = await response.json();
+      if (data.response) {
+        setMessages([...messages, { text: input, user: true }, { text: data.response, user: false }]);
+      } else {
+        console.error('Unexpected response format:', data);
+      }
+      setInput("");
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
   return (
