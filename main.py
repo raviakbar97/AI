@@ -25,7 +25,7 @@ function App() {
     if (input.trim() === "") return;
 
     try {
-      const response = await fetch("http://localhost:8000/chat", {
+      const response = await fetch("https://opulent-guide-9rg9pw64v9x3wwj-8000.app.github.dev/chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
